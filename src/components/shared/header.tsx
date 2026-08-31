@@ -133,15 +133,35 @@ const navItems = [
 
 export default function Header() {
   const [programsOpen, setProgramsOpen] = useState(false);
+
   const [activeProgramId, setActiveProgramId] = useState(programs[0].id);
+
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
+
+  const [mobileExpandedProgramId, setMobileExpandedProgramId] = useState<
+    string | null
+  >(null);
 
   const activeProgram = programs.find(
     (program) => program.id === activeProgramId,
   );
 
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setMobileProgramsOpen(false);
+    setMobileExpandedProgramId(null);
+  };
+
+  const toggleMobileProgram = (programId: string) => {
+    setMobileExpandedProgramId((current) =>
+      current === programId ? null : programId,
+    );
+  };
+
   return (
-    <header className="relative z-50 border-b border-[#e7e7e7] bg-white">
+    <header className="z-50 border-b border-border bg-background sticky top-0">
       <div className="container flex h-31.5 items-center justify-between">
         <Link href="/" className="relative block h-23.75 w-32.5 shrink-0">
           <Image
@@ -153,11 +173,12 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center lg:flex">
+        {/* Desktop navigation */}
+        <nav className="hidden items-center xl:flex">
           <div className="flex items-center gap-7">
             <Link
               href="/about-us"
-              className="text-[15px] font-semibold text-black transition-opacity hover:opacity-60"
+              className="text-[15px] font-semibold transition-opacity hover:opacity-60"
             >
               About
             </Link>
@@ -169,7 +190,7 @@ export default function Header() {
             >
               <button
                 type="button"
-                className="flex h-12 items-center gap-1 text-[15px] font-semibold text-black"
+                className="flex h-12 items-center gap-1 text-[15px] font-semibold"
               >
                 Programs
                 <ChevronDown
@@ -260,7 +281,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="whitespace-nowrap text-[15px] font-semibold text-black transition-opacity hover:opacity-60"
+                className="whitespace-nowrap text-[15px] font-semibold transition-opacity hover:opacity-60"
               >
                 {item.title}
               </Link>
@@ -268,53 +289,128 @@ export default function Header() {
           </div>
         </nav>
 
-        <div className="hidden items-center gap-2.5 lg:flex">
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-2.5 xl:flex">
           <Link
             href="/enroll"
-            className="flex h-10 min-w-29 items-center justify-center rounded-lg bg-[#207183] px-5 text-[14px] font-medium text-white transition-colors hover:bg-[#175d6c]"
+            className="flex h-10 min-w-29 items-center justify-center rounded-lg bg-primary px-5 text-[14px] font-medium text-white transition-colors hover:bg-[#175d6c]"
           >
             Enroll Now
           </Link>
 
           <Link
             href="/book-demo"
-            className="flex h-10 min-w-39.5 items-center justify-center rounded-lg bg-[#207183] px-5 text-[14px] font-medium text-white transition-colors hover:bg-[#175d6c]"
+            className="flex h-10 min-w-39.5 items-center justify-center rounded-lg bg-primary px-5 text-[14px] font-medium text-white transition-colors hover:bg-[#175d6c]"
           >
             Book Demo Now
           </Link>
         </div>
 
+        {/* Mobile menu button */}
         <button
           type="button"
           aria-label="Toggle menu"
           onClick={() => setMobileOpen((prev) => !prev)}
-          className="flex size-10 items-center justify-center rounded-lg border lg:hidden"
+          className="flex size-10 items-center justify-center rounded-lg border xl:hidden"
         >
           {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </div>
 
+      {/* Mobile navigation */}
       {mobileOpen && (
-        <div className="border-t bg-white px-6 py-5 lg:hidden">
+        <div className="border-t bg-white px-6 py-5 xl:hidden">
           <div className="flex flex-col gap-1">
             <Link
-              href="/about"
+              href="/about-us"
+              onClick={closeMobileMenu}
               className="rounded-lg px-3 py-3 text-sm hover:bg-muted"
             >
               About
             </Link>
 
-            <Link
-              href="/programs"
-              className="rounded-lg px-3 py-3 text-sm hover:bg-muted"
-            >
-              Programs
-            </Link>
+            {/* Programs */}
+            <div>
+              <button
+                type="button"
+                onClick={() => setMobileProgramsOpen((prev) => !prev)}
+                className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm hover:bg-muted"
+              >
+                <span>Programs</span>
+
+                <ChevronDown
+                  className={cn(
+                    "size-4 transition-transform duration-200",
+                    mobileProgramsOpen && "rotate-180",
+                  )}
+                />
+              </button>
+
+              {mobileProgramsOpen && (
+                <div className="ml-3 border-l border-[#e7e7e7] pl-2">
+                  {programs.map((program) => {
+                    const hasChildren = Boolean(program.children?.length);
+
+                    const isExpanded = mobileExpandedProgramId === program.id;
+
+                    if (!hasChildren && program.href) {
+                      return (
+                        <Link
+                          key={program.id}
+                          href={program.href}
+                          onClick={closeMobileMenu}
+                          className="block rounded-lg px-3 py-3 text-sm text-[#444] hover:bg-muted"
+                        >
+                          {program.title}
+                        </Link>
+                      );
+                    }
+
+                    return (
+                      <div key={program.id}>
+                        <button
+                          type="button"
+                          onClick={() => toggleMobileProgram(program.id)}
+                          className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm text-[#444] hover:bg-muted"
+                        >
+                          <span>{program.title}</span>
+
+                          <ChevronDown
+                            className={cn(
+                              "size-4 shrink-0 transition-transform duration-200",
+                              isExpanded && "rotate-180",
+                            )}
+                          />
+                        </button>
+
+                        {isExpanded &&
+                          program.children &&
+                          program.children.length > 0 && (
+                            <div className="ml-3 border-l border-[#e7e7e7] pl-2">
+                              {program.children.map((child) => (
+                                <Link
+                                  key={child.href}
+                                  href={child.href}
+                                  onClick={closeMobileMenu}
+                                  className="block rounded-lg px-3 py-2.5 text-[13px] leading-5 text-[#666] hover:bg-muted"
+                                >
+                                  {child.title}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
 
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={closeMobileMenu}
                 className="rounded-lg px-3 py-3 text-sm hover:bg-muted"
               >
                 {item.title}
@@ -324,14 +420,16 @@ export default function Header() {
             <div className="mt-4 grid grid-cols-2 gap-3">
               <Link
                 href="/enroll"
-                className="flex h-11 items-center justify-center rounded-lg bg-[#207183] text-sm text-white"
+                onClick={closeMobileMenu}
+                className="flex h-11 items-center justify-center rounded-lg bg-primary text-sm text-white"
               >
                 Enroll Now
               </Link>
 
               <Link
                 href="/book-demo"
-                className="flex h-11 items-center justify-center rounded-lg bg-[#207183] text-sm text-white"
+                onClick={closeMobileMenu}
+                className="flex h-11 items-center justify-center rounded-lg bg-primary text-sm text-white"
               >
                 Book Demo Now
               </Link>

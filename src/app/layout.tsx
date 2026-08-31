@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "@/assets/globals.css";
 import Header from "@/components/shared/header";
+import Footer from "@/components/shared/footer";
 
 const urbanist = Urbanist({
   variable: "--font-urbanist",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
