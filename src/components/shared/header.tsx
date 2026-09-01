@@ -191,6 +191,7 @@ export default function Header() {
               <button
                 type="button"
                 className="flex h-12 items-center gap-1 text-[15px] font-semibold"
+                aria-label="Programs"
               >
                 Programs
                 <ChevronDown
@@ -244,6 +245,7 @@ export default function Header() {
                           key={program.id}
                           type="button"
                           onMouseEnter={() => setActiveProgramId(program.id)}
+                          aria-label={`Open ${program.title} submenu`}
                           className={cn(
                             "flex min-h-11 w-full items-center justify-between rounded-lg px-4 text-left text-[15px] text-[#222] transition-colors hover:bg-[#f3f4f7]",
                             isActive && "bg-[#f1f2f5]",
@@ -334,6 +336,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setMobileProgramsOpen((prev) => !prev)}
+                aria-label="Toggle Programs submenu"
                 className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm hover:bg-muted"
               >
                 <span>Programs</span>
@@ -370,6 +373,7 @@ export default function Header() {
                       <div key={program.id}>
                         <button
                           type="button"
+                          aria-label={`Toggle ${program.title} submenu`}
                           onClick={() => toggleMobileProgram(program.id)}
                           className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm text-[#444] hover:bg-muted"
                         >

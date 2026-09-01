@@ -77,6 +77,7 @@ export default function Footer() {
             <Button
               type="submit"
               className="h-11 shrink-0 bg-primary px-6 hover:bg-primary/90"
+              aria-label="Subscribe"
             >
               Subscribe
             </Button>
