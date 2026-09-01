@@ -1,3 +1,5 @@
+import PricingIntroSection from "@/components/pricing/pricing-intro-section";
+import PricingPlans from "@/components/pricing/pricing-plan";
 import PageBanner from "@/components/reusable/page-banner";
 
 export default function Page() {
@@ -8,6 +10,10 @@ export default function Page() {
         subtitle="Get Access to our courses"
         imageSrc="/pricing-banner.png"
       />
+
+      <PricingIntroSection />
+
+      <PricingPlans />
     </div>
   );
 }
