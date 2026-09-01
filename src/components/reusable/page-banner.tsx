@@ -22,7 +22,7 @@ export default function PageBanner({
       />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
-        <h1 className="text-3xl font-bold">{title}</h1>
+        <h1 className="text-5xl font-bold">{title}</h1>
         <p className="mt-2 text-lg">{subtitle}</p>
       </div>
     </div>
