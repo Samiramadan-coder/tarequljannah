@@ -101,7 +101,7 @@ export default function FormPhoneInput<T extends FieldValues>({
             )}
 
             <FieldContent>
-              <div className="flex gap-1">
+              <div className="flex gap-2">
                 <Select
                   value={countryCode}
                   onValueChange={(value) => {
