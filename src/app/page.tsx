@@ -1,3 +1,9 @@
+import RequestFreeDemo from "@/components/shared/request-free-demo";
+
 export default function Home() {
-  return <main className="min-h-screen"></main>;
+  return (
+    <main>
+      <RequestFreeDemo />
+    </main>
+  );
 }
