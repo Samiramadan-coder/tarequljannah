@@ -1,4 +1,4 @@
-import ContactIntroSection from "@/components/about/contact-intro-section";
+import ContactIntroSection from "@/components/contact/contact-intro-section";
 import PageBanner from "@/components/reusable/page-banner";
 
 export default function Page() {

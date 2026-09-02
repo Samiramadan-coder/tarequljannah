@@ -1,5 +1,4 @@
 import { Mail, Phone } from "lucide-react";
-
 import { Separator } from "@/components/ui/separator";
 
 export default function ContactIntroSection() {
