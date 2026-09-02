@@ -1,5 +1,6 @@
-import ContactIntroSection from "@/components/contact/contact-intro-section";
 import PageBanner from "@/components/reusable/page-banner";
+import ContactUsForm from "@/components/contact/contact-us-form";
+import ContactIntroSection from "@/components/contact/contact-intro-section";
 
 export default function Page() {
   return (
@@ -11,6 +12,8 @@ export default function Page() {
       />
 
       <ContactIntroSection />
+
+      <ContactUsForm />
     </div>
   );
 }
