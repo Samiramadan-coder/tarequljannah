@@ -3,6 +3,7 @@ import { Hero } from "@/components/landing/hero";
 import RequestFreeDemo from "@/components/shared/request-free-demo";
 import { ProgramsSection } from "@/components/landing/programs";
 import { QuranLearningSection } from "@/components/landing/quran-learning";
+import { StatisticsSection } from "@/components/landing/statistics";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <LearningFeatures />
       <ProgramsSection />
       <QuranLearningSection />
+      <StatisticsSection />
       <RequestFreeDemo />
     </main>
   );
