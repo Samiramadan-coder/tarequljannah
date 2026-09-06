@@ -126,6 +126,7 @@
   }
   html {
     @apply font-urbanist;
+    scroll-behavior: smooth;
   }
 }
 
