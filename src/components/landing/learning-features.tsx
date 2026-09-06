@@ -35,7 +35,7 @@ const features = [
 
 export default function LearningFeatures() {
   return (
-    <section className="bg-white px-6 py-12">
+    <section className="px-6 py-12">
       <div className="container">
         <div className="mb-10 text-center">
           <h2 className="text-5xl font-bold text-slate-100">

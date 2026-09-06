@@ -61,7 +61,7 @@ const questions = [
 
 export function QuranLearningSection() {
   return (
-    <section className="bg-white px-5 py-12">
+    <section className="px-5 py-12">
       <div className="container grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
         <Accordion
           type="single"
