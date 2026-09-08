@@ -1,4 +1,5 @@
 import PageBanner from "@/components/reusable/page-banner";
+import { OpinionsCarousel } from "@/components/testimonials/opinions";
 
 export default function Page() {
   return (
@@ -8,6 +9,8 @@ export default function Page() {
         subtitle="Our Clients says"
         imageSrc="/testimonials-banner.png"
       />
+
+      <OpinionsCarousel />
     </div>
   );
 }
