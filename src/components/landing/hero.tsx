@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -37,14 +38,24 @@ export function Hero() {
           </p>
 
           <a href="#request-free-demo">
-            <Button className="mt-5 rounded-full px-5 text-sm h-12">
+            <Button
+              className="mt-5 rounded-full px-5 text-sm h-12"
+              aria-label="Book A Free Demo"
+            >
               Book A Free Demo
             </Button>
           </a>
         </div>
 
         {/* الصورة والعرض */}
-        <div className="relative h-100"></div>
+        <div className="relative h-100">
+          <Image
+            src="/landing-hero.png"
+            alt="Landing Hero"
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
       </div>
     </section>
   );

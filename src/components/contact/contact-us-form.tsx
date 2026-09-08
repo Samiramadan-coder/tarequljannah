@@ -98,6 +98,7 @@ export default function ContactUsForm() {
           <Button
             className="rounded-sm h-11 w-40 font-semibold tracking-widest"
             type="submit"
+            aria-label="Send Message"
           >
             {isSubmitting && <Spinner />} Send Message
           </Button>

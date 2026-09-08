@@ -117,6 +117,7 @@ export default function RequestFreeDemo() {
           <Button
             className="rounded-sm h-11 w-45 font-semibold tracking-widest"
             type="submit"
+            aria-label="Send Message"
           >
             {isSubmitting && <Spinner />} Request Free Demo
           </Button>

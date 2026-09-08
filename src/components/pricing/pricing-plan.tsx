@@ -85,7 +85,11 @@ export default function PricingPlans() {
                   <Feature>${plan.perClass.toFixed(1)} / class</Feature>
                 </div>
 
-                <Button variant="outline" className="mt-7 w-full">
+                <Button
+                  variant="outline"
+                  className="mt-7 w-full"
+                  aria-label={`Choose ${plan.classes} classes plan`}
+                >
                   Choose Plan
                 </Button>
               </CardContent>
