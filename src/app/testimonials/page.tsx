@@ -1,4 +1,5 @@
 import PageBanner from "@/components/reusable/page-banner";
+import { CertificatesCarousel } from "@/components/testimonials/certificates";
 import { OpinionsCarousel } from "@/components/testimonials/opinions";
 
 export default function Page() {
@@ -11,6 +12,8 @@ export default function Page() {
       />
 
       <OpinionsCarousel />
+
+      <CertificatesCarousel />
     </div>
   );
 }
