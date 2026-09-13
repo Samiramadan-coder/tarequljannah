@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 
 import * as React from "react";
+
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 
@@ -73,6 +74,10 @@ export default function FormPhoneInput<T extends FieldValues>({
 }: FormPhoneInputProps<T>) {
   const [countryCode, setCountryCode] = React.useState(defaultCountry);
 
+  const phoneInputId = React.useId();
+  const countrySelectId = React.useId();
+  const errorId = React.useId();
+
   const country =
     countries.find((country) => country.code === countryCode) ?? countries[0];
 
@@ -90,6 +95,7 @@ export default function FormPhoneInput<T extends FieldValues>({
           <Field className={className} data-invalid={fieldState.invalid}>
             {label && (
               <FieldLabel
+                htmlFor={phoneInputId}
                 className={cn(
                   "text-xs font-semibold uppercase tracking-widest text-primary/50",
                   required &&
@@ -108,14 +114,21 @@ export default function FormPhoneInput<T extends FieldValues>({
                     const newCountry = countries.find(
                       (country) => country.code === value,
                     );
+
                     if (!newCountry) return;
+
                     setCountryCode(value);
+
                     field.onChange(
                       phoneNumber ? `${newCountry.dialCode}${phoneNumber}` : "",
                     );
                   }}
                 >
-                  <SelectTrigger className="bg-white min-h-11 w-50 rounded-sm border-none">
+                  <SelectTrigger
+                    id={countrySelectId}
+                    aria-label={`Country calling code. Selected ${country.name} ${country.dialCode}`}
+                    className="min-h-11 w-50 rounded-sm border-none bg-white"
+                  >
                     <SelectValue />
                   </SelectTrigger>
 
@@ -124,6 +137,7 @@ export default function FormPhoneInput<T extends FieldValues>({
                       <SelectItem key={country.code} value={country.code}>
                         <span className="flex items-center gap-2">
                           <span>{country.dialCode}</span>
+
                           <span className="text-muted-foreground">
                             {country.name}
                           </span>
@@ -134,24 +148,32 @@ export default function FormPhoneInput<T extends FieldValues>({
                 </Select>
 
                 <Input
+                  id={phoneInputId}
                   type="tel"
                   inputMode="tel"
+                  autoComplete="tel"
                   placeholder="50 123 4567"
+                  aria-label={label ?? "Phone number"}
+                  aria-invalid={fieldState.invalid}
+                  aria-describedby={fieldState.error ? errorId : undefined}
                   value={phoneNumber}
                   onBlur={field.onBlur}
                   onChange={(event) => {
                     const number = event.target.value.replace(/[^\d\s-]/g, "");
+
                     field.onChange(
                       number
                         ? `${country.dialCode}${number.replace(/\D/g, "")}`
                         : "",
                     );
                   }}
-                  className="border-none rounded-sm h-11 bg-white"
+                  className="h-11 rounded-sm border-none bg-white"
                 />
               </div>
 
-              <FieldError errors={[fieldState.error]} />
+              <div id={errorId}>
+                <FieldError errors={[fieldState.error]} />
+              </div>
             </FieldContent>
           </Field>
         );

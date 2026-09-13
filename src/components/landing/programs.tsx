@@ -146,9 +146,9 @@ export function ProgramsSection() {
           }}
           className="mb-5 text-center"
         >
-          <h2 className="text-5xl font-bold text-foreground/10">
+          {/* <h2 className="text-5xl font-bold text-foreground/10">
             Explore Our Programs
-          </h2>
+          </h2> */}
 
           <p className="-mt-1 text-3xl font-bold">
             Explore <span className="text-primary">Our Programs</span>

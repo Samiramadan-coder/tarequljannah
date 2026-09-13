@@ -5,7 +5,7 @@ import { OpinionsCarousel } from "@/components/testimonials/opinions";
 export default function Page() {
   return (
     <div>
-      <PageBanner
+      {/* <PageBanner
         title="Testimonials"
         subtitle="Our Clients says"
         imageSrc="/testimonials-banner.png"
@@ -13,7 +13,7 @@ export default function Page() {
 
       <OpinionsCarousel />
 
-      <CertificatesCarousel />
+      <CertificatesCarousel /> */}
     </div>
   );
 }

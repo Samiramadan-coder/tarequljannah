@@ -57,9 +57,9 @@ export function StatisticsSection() {
               MYTJ in <span className="text-primary">Numbers</span>
             </span>
 
-            <span className="absolute inset-x-0 -top-1 text-5xl font-bold text-foreground/10">
+            {/* <span className="absolute inset-x-0 -top-1 text-5xl font-bold text-foreground/10">
               MYTJ in Numbers
-            </span>
+            </span> */}
           </h2>
         </motion.div>
 

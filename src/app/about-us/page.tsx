@@ -6,7 +6,7 @@ import PageBanner from "@/components/reusable/page-banner";
 export default function Page() {
   return (
     <div>
-      <PageBanner
+      {/* <PageBanner
         title="About Us"
         subtitle="Guiding Hearts, Enlightening Minds – Learn Quran Online with Tareeq Al Jannah"
         imageSrc="/about-banner.png"
@@ -16,7 +16,7 @@ export default function Page() {
 
       <Stats />
 
-      <OurMission />
+      <OurMission /> */}
     </div>
   );
 }

@@ -50,9 +50,9 @@ export default function LearningFeatures() {
           }}
           className="mb-10 text-center"
         >
-          <h2 className="text-5xl font-bold text-slate-100">
+          {/* <h2 className="text-5xl font-bold text-slate-100">
             We provide different learning
-          </h2>
+          </h2> */}
 
           <h2 className="text-lg font-bold">Why us?</h2>
 

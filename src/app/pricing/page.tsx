@@ -8,11 +8,9 @@ export default function Page() {
       <PageBanner
         title="Our Pricing"
         subtitle="Get Access to our courses"
-        imageSrc="/pricing-banner.png"
+        imageSrc="/pricing-banner.webp"
       />
-
       <PricingIntroSection />
-
       <PricingPlans />
     </div>
   );

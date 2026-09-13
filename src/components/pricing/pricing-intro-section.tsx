@@ -1,9 +1,19 @@
+import * as motion from "motion/react-client";
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function PricingIntroSection() {
   return (
-    <section className="bg-background py-12 md:py-16">
+    <section className="overflow-hidden bg-background py-12 md:py-16">
       <div className="container">
         <div className="space-y-7">
-          <div className="space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease }}
+            className="space-y-3"
+          >
             <h1 className="max-w-5xl text-3xl font-bold leading-tight tracking-tight md:text-4xl">
               Learn the Quran Online at Tareeq Uljannah Institute – A Seamless
               Learning Experience from Home
@@ -28,9 +38,15 @@ export default function PricingIntroSection() {
               providing exceptional lessons tailored to meet the needs of both
               children and adults.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease }}
+            className="space-y-3"
+          >
             <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
               Affordable Pricing Plans Tailored Just for You
             </h2>
@@ -44,9 +60,15 @@ export default function PricingIntroSection() {
               is priceless, we offer competitive pricing plans designed to make
               this accessible to everyone.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-2">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease }}
+            className="space-y-2"
+          >
             <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
               Choose Your Ideal Learning Package
             </h3>
@@ -61,9 +83,15 @@ export default function PricingIntroSection() {
               , you can select the plan that aligns perfectly with your
               aspirations.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-2">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease }}
+            className="space-y-2"
+          >
             <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
               No Hidden Fees – Start Learning Today!
             </h3>
@@ -82,9 +110,15 @@ export default function PricingIntroSection() {
               </strong>{" "}
               starts without any financial barriers.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease }}
+            className="space-y-3"
+          >
             <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
               Enroll Now and Begin Your Spiritual Journey
             </h3>
@@ -106,7 +140,7 @@ export default function PricingIntroSection() {
               </strong>{" "}
               has never been easier or more fulfilling. Join us now!
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

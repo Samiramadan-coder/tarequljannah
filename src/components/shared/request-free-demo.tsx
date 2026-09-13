@@ -13,6 +13,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 import { FieldError } from "../ui/field";
+import { Label } from "../ui/label";
 import FormPhoneInput from "../reusable/phone-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
@@ -34,7 +35,12 @@ export default function RequestFreeDemo() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ContactUsFormValues>({
-    defaultValues: { name: "", phone: "", gender: undefined, captcha: "" },
+    defaultValues: {
+      name: "",
+      phone: "",
+      gender: undefined,
+      captcha: "",
+    },
     resolver: zodResolver(contactUsSchema),
   });
 
@@ -42,87 +48,128 @@ export default function RequestFreeDemo() {
     console.log(data);
   };
 
+  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
   return (
-    <div className="container max-w-5xl py-20" id="request-free-demo">
+    <section
+      id="request-free-demo"
+      className="container max-w-5xl py-20"
+      aria-labelledby="request-demo-title"
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="p-6 bg-[#F1F2F8] rounded-sm grid grid-cols-1 gap-4"
+        className="grid grid-cols-1 gap-4 rounded-sm bg-[#F1F2F8] p-6"
       >
-        <p className="text-lg font-semibold">
-          <span>Request Free Demo</span>
-        </p>
+        <h2 id="request-demo-title" className="text-lg font-semibold">
+          Request Free Demo
+        </h2>
 
-        {/* Name Input Field */}
         <div>
+          <Label htmlFor="demo-name" className="sr-only">
+            Your Name
+          </Label>
+
           <Input
+            id="demo-name"
             type="text"
-            className="h-11 bg-white rounded-sm border-none"
             placeholder="Your Name *"
+            autoComplete="name"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "demo-name-error" : undefined}
+            className="h-11 rounded-sm border-none bg-white"
             {...register("name")}
           />
-          <FieldError errors={[errors.name]} className="mt-1" />
+
+          <div id="demo-name-error">
+            <FieldError errors={[errors.name]} className="mt-1" />
+          </div>
         </div>
 
-        {/* Phone Input Field */}
-        <FormPhoneInput name="phone" control={control} />
-
-        {/* Gender Select Field */}
         <div>
+          <Label className="sr-only">Phone Number</Label>
+
+          <FormPhoneInput name="phone" control={control} />
+        </div>
+
+        <div>
+          <Label htmlFor="demo-gender" className="sr-only">
+            Gender
+          </Label>
+
           <Controller
             name="gender"
             control={control}
             render={({ field }) => (
-              <Select {...field}>
-                <SelectTrigger className="w-full min-h-11 bg-white rounded-sm border-none">
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger
+                  id="demo-gender"
+                  aria-invalid={!!errors.gender}
+                  aria-describedby={
+                    errors.gender ? "demo-gender-error" : undefined
+                  }
+                  className="min-h-11 w-full rounded-sm border-none bg-white"
+                >
                   <SelectValue placeholder="Select Gender" />
                 </SelectTrigger>
+
                 <SelectContent>
                   <SelectGroup>
                     <SelectItem value="male">Male</SelectItem>
+
                     <SelectItem value="female">Female</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
             )}
           />
-          <FieldError errors={[errors.gender]} className="mt-1" />
+
+          <div id="demo-gender-error">
+            <FieldError errors={[errors.gender]} className="mt-1" />
+          </div>
         </div>
 
-        <p className="text-muted-foreground text-sm">
+        <p className="text-sm text-muted-foreground">
           By filling out this form and clicking submit, you agree to our privacy
           policy.
         </p>
 
-        <Controller
-          name="captcha"
-          control={control}
-          render={({ field, fieldState }) => (
-            <div className="space-y-1">
-              <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                onChange={(token) => {
-                  field.onChange(token ?? "");
-                }}
-                onExpired={() => {
-                  field.onChange("");
-                }}
-              />
+        {recaptchaSiteKey && (
+          <Controller
+            name="captcha"
+            control={control}
+            render={({ field, fieldState }) => (
+              <div
+                role="group"
+                aria-label="Security verification"
+                className="space-y-1"
+              >
+                <ReCAPTCHA
+                  sitekey={recaptchaSiteKey}
+                  onChange={(token) => {
+                    field.onChange(token ?? "");
+                  }}
+                  onExpired={() => {
+                    field.onChange("");
+                  }}
+                />
 
-              <FieldError errors={[fieldState.error]} />
-            </div>
-          )}
-        />
+                <FieldError errors={[fieldState.error]} />
+              </div>
+            )}
+          />
+        )}
 
         <div className="flex justify-end">
           <Button
-            className="rounded-sm h-11 w-45 font-semibold tracking-widest"
+            className="h-11 w-45 rounded-sm font-semibold tracking-widest"
             type="submit"
-            aria-label="Send Message"
+            disabled={isSubmitting}
           >
-            {isSubmitting && <Spinner />} Request Free Demo
+            {isSubmitting && <Spinner />}
+            Request Free Demo
           </Button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }

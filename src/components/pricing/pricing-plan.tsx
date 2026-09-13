@@ -1,3 +1,5 @@
+import * as motion from "motion/react-client";
+
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -49,51 +51,76 @@ const plans = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function PricingPlans() {
   return (
-    <section className="bg-background py-12 md:py-16">
+    <section className="overflow-hidden bg-background py-12 md:py-16">
       <div className="container">
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {plans.map((plan) => (
-            <Card
+          {plans.map((plan, index) => (
+            <motion.div
               key={plan.classes}
-              className="overflow-hidden rounded-lg py-0 shadow-none"
+              initial={{
+                opacity: 0,
+                y: 24,
+                scale: 0.98,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.2,
+              }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.04,
+                ease,
+              }}
+              whileHover={{
+                y: -5,
+              }}
             >
-              <CardHeader
-                className={cn(
-                  "gap-2 px-7 py-7 text-white",
-                  plan.popular ? "bg-[#f5a000]" : "bg-[#287785]",
-                )}
-              >
-                <CardTitle className="text-xl font-semibold">
-                  {plan.classes} Classes
-                </CardTitle>
-
-                <p className="text-sm text-white/90">{plan.subtitle}</p>
-
-                <p className="pt-2 text-4xl font-bold">
-                  USD {plan.price.toFixed(2)}
-                </p>
-              </CardHeader>
-
-              <CardContent className="flex min-h-56 flex-col px-7 py-7">
-                <div className="space-y-5">
-                  <Feature>{plan.days} days / week</Feature>
-
-                  <Feature>30 minutes / day</Feature>
-
-                  <Feature>${plan.perClass.toFixed(1)} / class</Feature>
-                </div>
-
-                <Button
-                  variant="outline"
-                  className="mt-7 w-full"
-                  aria-label={`Choose ${plan.classes} classes plan`}
+              <Card className="h-full overflow-hidden rounded-lg py-0 shadow-none">
+                <CardHeader
+                  className={cn(
+                    "gap-2 px-7 py-7 text-white",
+                    plan.popular ? "bg-[#f5a000]" : "bg-[#287785]",
+                  )}
                 >
-                  Choose Plan
-                </Button>
-              </CardContent>
-            </Card>
+                  <CardTitle className="text-xl font-semibold">
+                    {plan.classes} Classes
+                  </CardTitle>
+
+                  <p className="text-sm text-white/90">{plan.subtitle}</p>
+
+                  <p className="pt-2 text-4xl font-bold">
+                    USD {plan.price.toFixed(2)}
+                  </p>
+                </CardHeader>
+
+                <CardContent className="flex min-h-56 flex-col px-7 py-7">
+                  <div className="space-y-5">
+                    <Feature>{plan.days} days / week</Feature>
+
+                    <Feature>30 minutes / day</Feature>
+
+                    <Feature>${plan.perClass.toFixed(1)} / class</Feature>
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    className="mt-7 w-full"
+                    aria-label={`Choose ${plan.classes} classes plan`}
+                  >
+                    Choose Plan
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -104,7 +131,7 @@ export default function PricingPlans() {
 function Feature({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-3 text-sm">
-      <Check className="size-4 shrink-0 text-primary" />
+      <Check className="size-4 shrink-0 text-primary" aria-hidden="true" />
 
       <span>{children}</span>
     </div>

@@ -88,9 +88,10 @@ export default function Footer() {
           <div>
             <Link href="/" className="relative block h-32.5 w-42.5">
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Tareequl Jannah"
                 fill
+                sizes="170px"
                 className="object-contain"
               />
             </Link>

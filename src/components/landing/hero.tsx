@@ -58,7 +58,7 @@ export default function QuranHero() {
         <div className="relative mx-auto w-full max-w-130 lg:mx-0">
           <div className="relative rotate-6 overflow-hidden rounded-[18px]">
             <Image
-              src="/landing-hero.png"
+              src="/landing-hero.webp"
               alt="Quran learning"
               width={650}
               height={520}
@@ -74,7 +74,7 @@ export default function QuranHero() {
               USD 8
             </div>
 
-            <div className="text-white">
+            <div className="">
               <p className="text-sm font-bold md:text-base">Special Offer</p>
 
               <p className="mt-1 text-xs md:text-sm">
