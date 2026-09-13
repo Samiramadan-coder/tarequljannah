@@ -88,8 +88,8 @@ export function QuranLearningSection() {
           <Accordion
             type="single"
             collapsible
-            className="w-full"
             defaultValue="item-1"
+            className="w-full"
           >
             {questions.map((question) => (
               <AccordionItem
@@ -98,7 +98,7 @@ export function QuranLearningSection() {
                 className="border-b border-slate-200"
               >
                 <AccordionTrigger className="py-3 text-left text-lg font-semibold hover:no-underline">
-                  <span>{question.title}</span>
+                  {question.title}
                 </AccordionTrigger>
 
                 <AccordionContent className="pb-3 pr-5 text-base leading-6">
@@ -128,15 +128,16 @@ export function QuranLearningSection() {
             duration: 0.65,
             ease,
           }}
-          className="relative aspect-video w-full overflow-hidden rounded-xl"
+          className="relative aspect-video w-full overflow-hidden rounded-xl bg-black"
         >
           <iframe
-            className="absolute inset-0 h-full w-full"
-            src="https://www.youtube.com/embed/_cthKaS5rtE"
+            src="https://www.youtube-nocookie.com/embed/_cthKaS5rtE?rel=0"
             title="The Leading Online Quran Platform"
             loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            className="absolute inset-0 h-full w-full"
           />
         </motion.div>
       </div>
