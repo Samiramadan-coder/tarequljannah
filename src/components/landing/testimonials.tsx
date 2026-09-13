@@ -35,6 +35,7 @@ export function TestimonialsCarousel() {
             id="testimonial-radio-1"
             type="radio"
             name="testimonials"
+            aria-label="Show testimonial 1"
             defaultChecked
             className="peer/one sr-only"
           />
@@ -43,6 +44,7 @@ export function TestimonialsCarousel() {
             id="testimonial-radio-2"
             type="radio"
             name="testimonials"
+            aria-label="Show testimonial 2"
             className="peer/two sr-only"
           />
 
@@ -50,12 +52,16 @@ export function TestimonialsCarousel() {
             id="testimonial-radio-3"
             type="radio"
             name="testimonials"
+            aria-label="Show testimonial 3"
             className="peer/three sr-only"
           />
 
           <div
             className="
-              flex transition-transform duration-500 ease-out
+              flex
+              transition-transform
+              duration-500
+              ease-[cubic-bezier(0.22,1,0.36,1)]
               peer-checked/one:translate-x-0
               peer-checked/two:-translate-x-full
               peer-checked/three:translate-x-[-200%]
@@ -86,7 +92,16 @@ export function TestimonialsCarousel() {
                   <label
                     htmlFor={`testimonial-radio-${previousIndex + 1}`}
                     aria-label="Previous testimonial"
-                    className="absolute left-0 top-1/2 flex size-12 -translate-y-1/2 cursor-pointer items-center justify-center bg-black text-white transition-colors hover:bg-primary"
+                    className="
+                      absolute left-0 top-1/2
+                      flex size-12
+                      -translate-y-1/2
+                      cursor-pointer
+                      items-center justify-center
+                      bg-black text-white
+                      transition-colors
+                      hover:bg-primary
+                    "
                   >
                     <ChevronLeft className="size-5" aria-hidden="true" />
                   </label>
@@ -94,7 +109,16 @@ export function TestimonialsCarousel() {
                   <label
                     htmlFor={`testimonial-radio-${nextIndex + 1}`}
                     aria-label="Next testimonial"
-                    className="absolute right-0 top-1/2 flex size-12 -translate-y-1/2 cursor-pointer items-center justify-center bg-black text-white transition-colors hover:bg-primary"
+                    className="
+                      absolute right-0 top-1/2
+                      flex size-12
+                      -translate-y-1/2
+                      cursor-pointer
+                      items-center justify-center
+                      bg-black text-white
+                      transition-colors
+                      hover:bg-primary
+                    "
                   >
                     <ChevronRight className="size-5" aria-hidden="true" />
                   </label>
@@ -105,15 +129,20 @@ export function TestimonialsCarousel() {
         </div>
 
         <div
-          className="mt-6 flex justify-center"
+          className="mt-6 flex items-center justify-center"
           aria-label="Testimonials navigation"
         >
           {testimonials.map((testimonial, index) => (
             <label
               key={testimonial.id}
               htmlFor={`testimonial-radio-${index + 1}`}
-              aria-label={`Go to testimonial ${index + 1} by ${testimonial.name}`}
-              className="flex size-12 cursor-pointer items-center justify-center rounded-full"
+              aria-label={`Show testimonial ${index + 1} by ${testimonial.name}`}
+              className="
+                flex size-12
+                cursor-pointer
+                items-center justify-center
+                rounded-full
+              "
             >
               <span className="size-2 rounded-full bg-foreground/20 transition-colors hover:bg-primary" />
             </label>

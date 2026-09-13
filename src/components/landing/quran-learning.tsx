@@ -7,6 +7,8 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 
+import YouTubeLite from "@/components/reusable/youtube-lite";
+
 const questions = [
   {
     value: "item-1",
@@ -130,14 +132,9 @@ export function QuranLearningSection() {
           }}
           className="relative aspect-video w-full overflow-hidden rounded-xl bg-black"
         >
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/_cthKaS5rtE?rel=0"
+          <YouTubeLite
+            videoId="_cthKaS5rtE"
             title="The Leading Online Quran Platform"
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="absolute inset-0 h-full w-full"
           />
         </motion.div>
       </div>
