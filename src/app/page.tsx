@@ -1,5 +1,5 @@
 import LearningFeatures from "@/components/landing/learning-features";
-import { Hero } from "@/components/landing/hero";
+import Hero from "@/components/landing/hero";
 import RequestFreeDemo from "@/components/shared/request-free-demo";
 import { ProgramsSection } from "@/components/landing/programs";
 import { QuranLearningSection } from "@/components/landing/quran-learning";

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import * as motion from "motion/react-client";
+
 import { Card, CardContent } from "@/components/ui/card";
 
 const programs = [
@@ -46,46 +48,116 @@ const programs = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 function ProgramCard({
   title,
   image,
   description,
+  index,
 }: {
   title: string;
   image: string;
   description: string;
+  index: number;
 }) {
   return (
-    <Card className="overflow-hidden rounded-none ring-0! bg-white shadow-none">
-      <div className="relative aspect-[1.55/1] overflow-hidden rounded-[3px]">
-        <Image src={image} alt={title} fill className="object-cover" />
-      </div>
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 28,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.06,
+        ease,
+      }}
+    >
+      <Card className="overflow-hidden rounded-none bg-white shadow-none ring-0!">
+        <motion.div
+          whileHover={{
+            y: -4,
+          }}
+          transition={{
+            duration: 0.25,
+            ease,
+          }}
+        >
+          <div className="relative aspect-[1.55/1] overflow-hidden rounded-[3px]">
+            <motion.div
+              className="absolute inset-0"
+              whileHover={{
+                scale: 1.035,
+              }}
+              transition={{
+                duration: 0.35,
+                ease,
+              }}
+            >
+              <Image
+                src={image}
+                alt={title}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
 
-      <CardContent className="px-1 pt-1.5 text-center">
-        <h3 className="font-semibold text-base">{title}</h3>
-        <p className="text-base mt-1 leading-[1.45]">{description}</p>
-      </CardContent>
-    </Card>
+          <CardContent className="px-1 pt-1.5 text-center">
+            <h3 className="text-base font-semibold">{title}</h3>
+
+            <p className="mt-1 text-base leading-[1.45]">{description}</p>
+          </CardContent>
+        </motion.div>
+      </Card>
+    </motion.div>
   );
 }
 
 export function ProgramsSection() {
   return (
-    <section className="bg-white px-4 py-8">
+    <section className="overflow-hidden bg-white px-4 py-8">
       <div className="container max-w-7xl">
-        <div className="mb-5 text-center">
-          <h2 className="text-5xl font-bold text-slate-100">
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 16,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.5,
+          }}
+          transition={{
+            duration: 0.5,
+            ease,
+          }}
+          className="mb-5 text-center"
+        >
+          <h2 className="text-5xl font-bold text-foreground/10">
             Explore Our Programs
           </h2>
 
           <p className="-mt-1 text-3xl font-bold">
             Explore <span className="text-primary">Our Programs</span>
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
-          {programs.map((program) => (
-            <ProgramCard key={program.title} {...program} />
+          {programs.map((program, index) => (
+            <ProgramCard key={program.title} {...program} index={index} />
           ))}
         </div>
       </div>

@@ -1,29 +1,20 @@
-"use client";
-
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { useEffect, useRef, useState } from "react";
-import Autoplay from "embla-carousel-autoplay";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
+    id: "testimonial-1",
     name: "Rahma Arabi",
     image: "/images/testimonials/rahma.jpg",
     text: "My kids were absolutely thrilled with the experience. The team was incredibly professional and made learning feel fun and engaging.",
   },
   {
+    id: "testimonial-2",
     name: "Sarah Johnson",
     image: "/images/testimonials/sarah.jpg",
     text: "The program was well organized and easy to follow. My children gained confidence and really enjoyed every session.",
   },
   {
+    id: "testimonial-3",
     name: "Ahmed Ali",
     image: "/images/testimonials/ahmed.jpg",
     text: "A great experience from start to finish. The instructors were patient, supportive, and very knowledgeable.",
@@ -31,90 +22,91 @@ const testimonials = [
 ];
 
 export function TestimonialsCarousel() {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  const autoplay = useRef(
-    Autoplay({
-      delay: 5000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    }),
-  );
-
-  useEffect(() => {
-    if (!api) return;
-
-    const onSelect = () => {
-      setCurrent(api.selectedScrollSnap());
-    };
-
-    onSelect();
-    api.on("select", onSelect);
-
-    return () => {
-      api.off("select", onSelect);
-    };
-  }, [api]);
-
   return (
     <section className="relative overflow-hidden py-20">
-      <div className="w-full container">
+      <div className="container w-full">
         <div className="mb-10 text-center">
           <p className="mb-2 text-lg font-medium">Our Clients Say</p>
+
           <h2 className="text-5xl font-semibold tracking-tight text-primary">
             Testimonials
           </h2>
         </div>
 
-        <Carousel
-          setApi={setApi}
-          // eslint-disable-next-line react-hooks/refs
-          plugins={[autoplay.current]}
-          opts={{
-            loop: true,
-            align: "center",
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {testimonials.map((testimonial) => (
-              <CarouselItem key={testimonial.name}>
-                <div className="mx-auto flex min-h-57.5 max-w-3xl flex-col items-center justify-center px-12 text-center">
-                  <Avatar className="mb-3 h-14 w-14">
-                    <AvatarImage
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                    />
-                    <AvatarFallback>
-                      {testimonial.name.slice(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+        <div className="relative">
+          <div
+            className="
+              flex w-full snap-x snap-mandatory
+              overflow-x-auto scroll-smooth
+              scrollbar-none
+              [&::-webkit-scrollbar]:hidden
+            "
+          >
+            {testimonials.map((testimonial, index) => {
+              const previous =
+                testimonials[index === 0 ? testimonials.length - 1 : index - 1];
 
-                  <h3 className="mb-5 text-lg font-bold">{testimonial.name}</h3>
+              const next =
+                testimonials[index === testimonials.length - 1 ? 0 : index + 1];
 
-                  <p className="text-sm leading-7 md:text-base">
-                    {testimonial.text}
-                  </p>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
+              return (
+                <article
+                  id={testimonial.id}
+                  key={testimonial.id}
+                  className="relative w-full shrink-0 snap-center"
+                >
+                  <div className="mx-auto flex min-h-57.5 max-w-3xl flex-col items-center justify-center px-14 text-center">
+                    <h3 className="mb-5 text-lg font-bold">
+                      {testimonial.name}
+                    </h3>
 
-          <CarouselPrevious className="left-0 rounded-none border-0 bg-black text-white hover:bg-[#31818c]" />
-          <CarouselNext className="right-0 rounded-none border-0 bg-black text-white hover:bg-[#31818c]" />
-        </Carousel>
+                    <p className="text-sm leading-7 md:text-base">
+                      {testimonial.text}
+                    </p>
+                  </div>
+
+                  <a
+                    href={`#${previous.id}`}
+                    aria-label="Previous testimonial"
+                    className="
+                      absolute left-0 top-1/2
+                      flex size-10 -translate-y-1/2
+                      items-center justify-center
+                      bg-black text-white
+                      transition-colors
+                      hover:bg-primary
+                    "
+                  >
+                    <ChevronLeft className="size-5" />
+                  </a>
+
+                  <a
+                    href={`#${next.id}`}
+                    aria-label="Next testimonial"
+                    className="
+                      absolute right-0 top-1/2
+                      flex size-10 -translate-y-1/2
+                      items-center justify-center
+                      bg-black text-white
+                      transition-colors
+                      hover:bg-primary
+                    "
+                  >
+                    <ChevronRight className="size-5" />
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+        </div>
 
         <div className="mt-8 flex justify-center gap-2">
-          {testimonials.map((testimonial, index) => (
-            <button
-              key={testimonial.name}
-              type="button"
-              aria-label={`Go to testimonial ${index + 1}`}
-              onClick={() => api?.scrollTo(index)}
-              className={`h-2 rounded-full transition-all ${
-                current === index ? "w-6 bg-[#31818c]" : "w-2 bg-gray-300"
-              }`}
+          {testimonials.map((testimonial) => (
+            <a
+              key={testimonial.id}
+              href={`#${testimonial.id}`}
+              aria-label={`Go to ${testimonial.name} testimonial`}
+              className="size-2 rounded-full bg-foreground/20 transition-all hover:bg-primary"
             />
           ))}
         </div>

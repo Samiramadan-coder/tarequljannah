@@ -1,3 +1,5 @@
+import * as motion from "motion/react-client";
+
 import {
   Accordion,
   AccordionItem,
@@ -59,42 +61,84 @@ const questions = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export function QuranLearningSection() {
   return (
-    <section className="px-5 py-12">
+    <section className="overflow-hidden px-5 py-12">
       <div className="container grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full"
-          defaultValue="item-1"
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -24,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.15,
+          }}
+          transition={{
+            duration: 0.55,
+            ease,
+          }}
         >
-          {questions.map((question) => (
-            <AccordionItem
-              key={question.value}
-              value={question.value}
-              className="border-b border-slate-200"
-            >
-              <AccordionTrigger className="py-3 text-left text-lg font-semibold hover:no-underline">
-                <span>{question.title}</span>
-              </AccordionTrigger>
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full"
+            defaultValue="item-1"
+          >
+            {questions.map((question) => (
+              <AccordionItem
+                key={question.value}
+                value={question.value}
+                className="border-b border-slate-200"
+              >
+                <AccordionTrigger className="py-3 text-left text-lg font-semibold hover:no-underline">
+                  <span>{question.title}</span>
+                </AccordionTrigger>
 
-              <AccordionContent className="pb-3 pr-5 text-base leading-6">
-                {question.content}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+                <AccordionContent className="pb-3 pr-5 text-base leading-6">
+                  {question.content}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </motion.div>
 
-        <div className="relative aspect-video w-full overflow-hidden">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: 28,
+            scale: 0.98,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+            scale: 1,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          transition={{
+            duration: 0.65,
+            ease,
+          }}
+          className="relative aspect-video w-full overflow-hidden rounded-xl"
+        >
           <iframe
             className="absolute inset-0 h-full w-full"
-            src="https://www.youtube.com/embed/_cthKaS5rtE?si=Yf9Uc6XopsFb3W2T&enablejsapi=1&origin=https://www.tareequljannah.com"
+            src="https://www.youtube.com/embed/_cthKaS5rtE"
             title="The Leading Online Quran Platform"
+            loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );
