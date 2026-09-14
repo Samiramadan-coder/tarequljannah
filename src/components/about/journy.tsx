@@ -1,7 +1,9 @@
 import { Badge } from "@/components/ui/badge";
+import YouTubeLite from "../reusable/youtube-lite";
+import { Clock3, CheckCircle2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
-import { Clock3, BookOpen, CheckCircle2 } from "lucide-react";
+import * as motion from "motion/react-client";
 
 const features = [
   "We strive to make Quran, Arabic, and Islamic Studies accessible to students worldwide.",
@@ -12,69 +14,103 @@ const features = [
   "We are committed to excellence, faith, and spiritual connection.",
 ];
 
+const fadeUp = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export function Journey() {
   return (
     <section className="min-h-screen py-10 sm:py-16">
       <div className="container">
-        <Card className="ring-0! bg-background py-0 rounded-none">
-          {/* <div className="relative aspect-video w-full">
-            <iframe
-              className="absolute inset-0 h-full w-full"
-              src="https://www.youtube.com/embed/tKl2CtYGPzw?si=MUfQfDC9EKSluoXw&enablejsapi=1"
-              title="Ready to start your Arabic journey"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          <Card className="rounded-none bg-background py-0 ring-0!">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.4,
+                ease: "easeOut",
+              }}
+              className="relative aspect-video w-full overflow-hidden rounded-xl bg-white"
+            >
+              <YouTubeLite
+                videoId="tKl2CtYGPzw"
+                title="The Leading Online Quran Platform"
+              />
+            </motion.div>
 
-            <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md px-3 py-2 text-xs text-white backdrop-blur-sm">
-              <BookOpen className="size-4" />
-              <span>Ready to start your Arabic journey?</span>
-            </div>
-          </div> */}
-          <div className="relative aspect-video w-full overflow-hidden bg-white">
-            <iframe
-              className="absolute left-1/2 top-1/2 block h-[102%] w-[102%] -translate-x-1/2 -translate-y-1/2 border-0"
-              src="https://www.youtube.com/embed/tKl2CtYGPzw"
-              title="Ready to start your Arabic journey"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+            <CardContent className="p-5 sm:p-8 lg:p-10">
+              <motion.div
+                variants={fadeUp}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.35,
+                  ease: "easeOut",
+                }}
+                className="max-w-4xl"
+              >
+                <div className="mb-4 flex flex-wrap items-center gap-2">
+                  <Badge variant="secondary">Arabic Learning</Badge>
 
-            <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md px-3 py-2 text-xs text-white backdrop-blur-sm">
-              <BookOpen className="size-4" />
-              <span>Ready to start your Arabic journey?</span>
-            </div>
-          </div>
+                  <Badge variant="outline">Quran Studies</Badge>
 
-          <CardContent className="p-5 sm:p-8 lg:p-10">
-            <div className="max-w-4xl">
-              <div className="mb-4 flex flex-wrap items-center gap-2">
-                <Badge variant="secondary">Arabic Learning</Badge>
-                <Badge variant="outline">Quran Studies</Badge>
+                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Clock3 className="size-3.5" />5 min read
+                  </span>
+                </div>
 
-                <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <Clock3 className="size-3.5" />5 min read
-                </span>
-              </div>
+                <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+                  Tareeq Al Jannah – Your Ultimate Destination for Learning
+                  Quran, Arabic & Islamic Studies.
+                </h1>
 
-              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
-                Tareeq Al Jannah – Your Ultimate Destination for Learning Quran,
-                Arabic & Islamic Studies.
-              </h1>
+                <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base">
+                  At Tareeq Al Jannah, we believe that learning the Quran,
+                  Arabic, and Islamic Studies should be accessible to everyone.
+                  We provide a supportive learning environment designed to help
+                  students grow in knowledge, confidence, and faith.
+                </p>
+              </motion.div>
 
-              <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base">
-                At Tareeq Al Jannah, we believe that learning the Quran, Arabic,
-                and Islamic Studies should be accessible to everyone. We provide
-                a supportive learning environment designed to help students grow
-                in knowledge, confidence, and faith.
-              </p>
-            </div>
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeOut",
+                }}
+                className="origin-left"
+              >
+                <Separator className="my-8" />
+              </motion.div>
 
-            <Separator className="my-8" />
-
-            <div>
               <article className="space-y-10">
-                <section>
+                <motion.section
+                  variants={fadeUp}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    duration: 0.35,
+                    ease: "easeOut",
+                  }}
+                >
                   <h2 className="text-xl font-semibold sm:text-2xl">
                     What makes us different?
                   </h2>
@@ -87,27 +123,74 @@ export function Journey() {
                     to making Islamic education fun, accessible, and
                     life-changing.
                   </p>
-                </section>
+                </motion.section>
 
-                <section>
+                <motion.section
+                  variants={fadeUp}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    duration: 0.35,
+                    ease: "easeOut",
+                  }}
+                >
                   <h2 className="text-xl font-semibold sm:text-2xl">
                     Tareeq Al Jannah – Where Learning Meets Spirituality.
                   </h2>
 
-                  <ul className="mt-5 space-y-3">
+                  <motion.ul
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    variants={{
+                      hidden: {},
+                      visible: {
+                        transition: {
+                          staggerChildren: 0.05,
+                        },
+                      },
+                    }}
+                    className="mt-5 space-y-3"
+                  >
                     {features.map((feature) => (
-                      <li
+                      <motion.li
                         key={feature}
+                        variants={{
+                          hidden: {
+                            opacity: 0,
+                            x: -15,
+                          },
+                          visible: {
+                            opacity: 1,
+                            x: 0,
+                          },
+                        }}
+                        transition={{
+                          duration: 0.25,
+                          ease: "easeOut",
+                        }}
                         className="flex items-start gap-3 text-sm leading-6 text-muted-foreground"
                       >
                         <CheckCircle2 className="mt-1 size-4 shrink-0 text-primary" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
 
-                <section className="space-y-4">
+                        <span>{feature}</span>
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                </motion.section>
+
+                <motion.section
+                  variants={fadeUp}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.35,
+                    ease: "easeOut",
+                  }}
+                  className="space-y-4"
+                >
                   <h2 className="text-xl font-semibold sm:text-2xl">
                     Our Approach at Tareeq Al Jannah:
                   </h2>
@@ -144,9 +227,19 @@ export function Journey() {
                     make your journey of learning meaningful, engaging, and
                     spiritually enriching.
                   </p>
-                </section>
+                </motion.section>
 
-                <section className="space-y-4">
+                <motion.section
+                  variants={fadeUp}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.35,
+                    ease: "easeOut",
+                  }}
+                  className="space-y-4"
+                >
                   <h2 className="text-xl font-semibold sm:text-2xl">
                     Our Vision
                   </h2>
@@ -168,11 +261,11 @@ export function Journey() {
                     equipping them with the knowledge and confidence to lead
                     with wisdom and purpose.
                   </p>
-                </section>
+                </motion.section>
               </article>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </section>
   );

@@ -35,7 +35,7 @@ export default function YouTubeLite({ videoId, title }: YouTubeLiteProps) {
       className="group absolute inset-0 h-full w-full overflow-hidden bg-black"
     >
       <img
-        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
         alt=""
         loading="lazy"
         decoding="async"
