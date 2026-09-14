@@ -5,15 +5,13 @@ import ContactIntroSection from "@/components/contact/contact-intro-section";
 export default function Page() {
   return (
     <div>
-      {/* <PageBanner
+      <PageBanner
         title="Contact Us"
         subtitle="Do you need urgent support?​"
-        imageSrc="/contact-us-banner.png"
+        imageSrc="/contact-us-banner.webp"
       />
-
       <ContactIntroSection />
-
-      <ContactUsForm /> */}
+      <ContactUsForm />
     </div>
   );
 }

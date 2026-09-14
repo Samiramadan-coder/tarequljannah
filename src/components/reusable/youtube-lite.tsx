@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // components/youtube-lite.tsx
 
 "use client";
