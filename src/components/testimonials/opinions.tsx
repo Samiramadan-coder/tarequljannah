@@ -8,35 +8,29 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const testimonials = [
   {
+    id: "testimonial-1",
     name: "Rahma Arabi",
-    text: "My two kids are studying at TareequlJannah institute and it's a very good experience as the teacher are so experienced and professional they care a lot about the learning level of the kids. I can follow up step by step with the teacher as i receive email after each class that tells me what the kids learned and what is the homework. Alhamdulillah that I could find such a amazing program to help me and my kids and take us to Jannah. May Allah reward every one there for their efforts.",
+    text: "My kids were absolutely thrilled with the experience. The team was incredibly professional and made learning feel fun and engaging.",
   },
   {
+    id: "testimonial-2",
     name: "Sarah Johnson",
-    text: "My two kids are studying at TareequlJannah institute and it's a very good experience as the teacher are so experienced and professional they care a lot about the learning level of the kids. I can follow up step by step with the teacher as i receive email after each class that tells me what the kids learned and what is the homework. Alhamdulillah that I could find such a amazing program to help me and my kids and take us to Jannah. May Allah reward every one there for their efforts.",
+    text: "The program was well organized and easy to follow. My children gained confidence and really enjoyed every session.",
   },
   {
+    id: "testimonial-3",
     name: "Ahmed Ali",
-    text: "My two kids are studying at TareequlJannah institute and it's a very good experience as the teacher are so experienced and professional they care a lot about the learning level of the kids. I can follow up step by step with the teacher as i receive email after each class that tells me what the kids learned and what is the homework. Alhamdulillah that I could find such a amazing program to help me and my kids and take us to Jannah. May Allah reward every one there for their efforts.",
+    text: "A great experience from start to finish. The instructors were patient, supportive, and very knowledgeable.",
   },
 ];
 
 export function OpinionsCarousel() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-
-  const autoplay = useRef(
-    Autoplay({
-      delay: 5000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    }),
-  );
 
   useEffect(() => {
     if (!api) return;
@@ -46,6 +40,7 @@ export function OpinionsCarousel() {
     };
 
     onSelect();
+
     api.on("select", onSelect);
 
     return () => {
@@ -55,11 +50,17 @@ export function OpinionsCarousel() {
 
   return (
     <section className="relative overflow-hidden py-20">
-      <div className="w-full container">
+      <div className="container w-full">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-lg font-medium">Our Clients Say</p>
+
+          <h2 className="text-5xl font-semibold tracking-tight text-primary">
+            Testimonials
+          </h2>
+        </div>
+
         <Carousel
           setApi={setApi}
-          // eslint-disable-next-line react-hooks/refs
-          plugins={[autoplay.current]}
           opts={{
             loop: true,
             align: "center",
@@ -68,32 +69,73 @@ export function OpinionsCarousel() {
         >
           <CarouselContent>
             {testimonials.map((testimonial) => (
-              <CarouselItem key={testimonial.name}>
-                <div className="mx-auto flex min-h-57.5 max-w-5xl flex-col items-center justify-center px-12 text-center">
+              <CarouselItem key={testimonial.id}>
+                <article className="mx-auto flex min-h-57.5 max-w-3xl flex-col items-center justify-center px-16 text-center">
                   <h3 className="mb-5 text-lg font-bold">{testimonial.name}</h3>
+
                   <p className="text-sm leading-7 md:text-base">
                     {testimonial.text}
                   </p>
-                </div>
+                </article>
               </CarouselItem>
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="left-0 rounded-none border-0 bg-black text-white hover:bg-[#31818c]" />
-          <CarouselNext className="right-0 rounded-none border-0 bg-black text-white hover:bg-[#31818c]" />
+          <CarouselPrevious
+            className="
+              left-0
+              size-10
+              rounded-full
+              border-0
+              bg-black
+              text-white
+              hover:bg-primary
+              hover:text-white
+            "
+          />
+
+          <CarouselNext
+            className="
+              right-0
+              size-10
+              rounded-full
+              border-0
+              bg-black
+              text-white
+              hover:bg-primary
+              hover:text-white
+            "
+          />
         </Carousel>
 
-        <div className="mt-8 flex justify-center gap-2">
+        <div
+          className="mt-6 flex items-center justify-center"
+          aria-label="Testimonials navigation"
+        >
           {testimonials.map((testimonial, index) => (
             <button
-              key={testimonial.name}
+              key={testimonial.id}
               type="button"
-              aria-label={`Go to testimonial ${index + 1}`}
+              aria-label={`Show testimonial ${index + 1} by ${testimonial.name}`}
               onClick={() => api?.scrollTo(index)}
-              className={`h-2 rounded-full transition-all ${
-                current === index ? "w-6 bg-[#31818c]" : "w-2 bg-gray-300"
-              }`}
-            />
+              className="
+                flex size-12
+                cursor-pointer
+                items-center justify-center
+                rounded-full
+              "
+            >
+              <span
+                className={`
+                  size-2 rounded-full transition-colors
+                  ${
+                    current === index
+                      ? "bg-primary"
+                      : "bg-foreground/20 hover:bg-primary"
+                  }
+                `}
+              />
+            </button>
           ))}
         </div>
       </div>

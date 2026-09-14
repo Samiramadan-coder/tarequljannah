@@ -3,11 +3,11 @@ import PageBanner from "@/components/reusable/page-banner";
 export default function Page() {
   return (
     <div>
-      {/* <PageBanner
+      <PageBanner
         title="Our Blogs"
         subtitle=""
-        imageSrc="/testimonials-banner.png"
-      /> */}
+        imageSrc="/testimonials-banner.webp"
+      />
     </div>
   );
 }
