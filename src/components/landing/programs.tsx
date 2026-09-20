@@ -71,7 +71,7 @@ function ProgramCard({
   slug: string;
 }) {
   return (
-    <Link href={`/course-category/${slug}`}>
+    <Link href={`/courses/${slug}`}>
       <motion.div
         initial={{
           opacity: 0,

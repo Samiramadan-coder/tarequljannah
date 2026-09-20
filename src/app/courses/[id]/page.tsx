@@ -1,4 +1,4 @@
-import ListOfCategories from "@/components/course-category/list-of-categories";
+import ListOfCategories from "@/components/courses/list-of-categories";
 import PageBanner from "@/components/reusable/page-banner";
 
 export default function Page() {

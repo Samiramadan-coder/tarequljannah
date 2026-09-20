@@ -53,7 +53,7 @@ export default function Header() {
             </NavLink>
 
             <NavLink
-              href="/course-category"
+              href="/courses"
               className="text-[15px] font-semibold transition-opacity hover:opacity-60"
             >
               Programs
