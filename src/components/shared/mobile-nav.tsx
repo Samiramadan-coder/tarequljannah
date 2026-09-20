@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { useState, type ReactNode } from "react";
 import NavLink from "@/components/shared/nav-link";
 
 type NavItem = {

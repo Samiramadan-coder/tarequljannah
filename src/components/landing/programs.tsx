@@ -2,10 +2,12 @@ import Image from "next/image";
 import * as motion from "motion/react-client";
 
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 const programs = [
   {
     title: "Arabic",
+    slug: "arabic",
     image:
       "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
     description:
@@ -13,6 +15,7 @@ const programs = [
   },
   {
     title: "Ijazah",
+    slug: "ijazah",
     image:
       "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
     description:
@@ -20,6 +23,7 @@ const programs = [
   },
   {
     title: "Islamic Studies",
+    slug: "islamic-studies",
     image:
       "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
     description:
@@ -27,6 +31,7 @@ const programs = [
   },
   {
     title: "Quran",
+    slug: "quran-category",
     image:
       "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
     description:
@@ -34,6 +39,7 @@ const programs = [
   },
   {
     title: "Tajweed",
+    slug: "tajweed",
     image:
       "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
     description:
@@ -41,6 +47,7 @@ const programs = [
   },
   {
     title: "Revert Program",
+    slug: "revert-program",
     image:
       "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
     description:
@@ -55,71 +62,74 @@ function ProgramCard({
   image,
   description,
   index,
+  slug,
 }: {
   title: string;
   image: string;
   description: string;
   index: number;
+  slug: string;
 }) {
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: 28,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.2,
-      }}
-      transition={{
-        duration: 0.55,
-        delay: index * 0.06,
-        ease,
-      }}
-    >
-      <Card className="overflow-hidden rounded-none bg-white shadow-none ring-0!">
-        <motion.div
-          whileHover={{
-            y: -4,
-          }}
-          transition={{
-            duration: 0.25,
-            ease,
-          }}
-        >
-          <div className="relative aspect-[1.55/1] overflow-hidden rounded-[3px]">
-            <motion.div
-              className="absolute inset-0"
-              whileHover={{
-                scale: 1.035,
-              }}
-              transition={{
-                duration: 0.35,
-                ease,
-              }}
-            >
-              <Image
-                src={image}
-                alt={title}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover"
-              />
-            </motion.div>
-          </div>
+    <Link href={`/course-category/${slug}`}>
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 28,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.2,
+        }}
+        transition={{
+          duration: 0.55,
+          delay: index * 0.06,
+          ease,
+        }}
+      >
+        <Card className="overflow-hidden rounded-none bg-white shadow-none ring-0!">
+          <motion.div
+            whileHover={{
+              y: -4,
+            }}
+            transition={{
+              duration: 0.25,
+              ease,
+            }}
+          >
+            <div className="relative aspect-[1.55/1] overflow-hidden rounded-[3px]">
+              <motion.div
+                className="absolute inset-0"
+                whileHover={{
+                  scale: 1.035,
+                }}
+                transition={{
+                  duration: 0.35,
+                  ease,
+                }}
+              >
+                <Image
+                  src={image}
+                  alt={title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </motion.div>
+            </div>
 
-          <CardContent className="px-1 pt-1.5 text-center">
-            <h3 className="text-base font-semibold">{title}</h3>
-
-            <p className="mt-1 text-base leading-[1.45]">{description}</p>
-          </CardContent>
-        </motion.div>
-      </Card>
-    </motion.div>
+            <CardContent className="px-1 pt-1.5 text-center">
+              <h3 className="text-base font-semibold">{title}</h3>
+              <p className="mt-1 text-base leading-[1.45]">{description}</p>
+            </CardContent>
+          </motion.div>
+        </Card>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -146,10 +156,6 @@ export function ProgramsSection() {
           }}
           className="mb-5 text-center"
         >
-          {/* <h2 className="text-5xl font-bold text-foreground/10">
-            Explore Our Programs
-          </h2> */}
-
           <p className="-mt-1 text-3xl font-bold">
             Explore <span className="text-primary">Our Programs</span>
           </p>
