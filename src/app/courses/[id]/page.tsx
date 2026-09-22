@@ -6,6 +6,11 @@ import ListOfCourses from "@/components/courses/list-of-courses";
 export default async function Page() {
   const { data, ok } = await http.get<{ data: Course[] }>(
     "/api/v1/admin/courses",
+    {
+      params: {
+        category_ids: 1,
+      },
+    },
   );
 
   if (!ok) {
