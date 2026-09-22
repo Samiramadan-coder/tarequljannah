@@ -1,77 +1,14 @@
+import Link from "next/link";
 import Image from "next/image";
 import * as motion from "motion/react-client";
-
+import { Category } from "../../../types/courses";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
-
-const programs = [
-  {
-    title: "Arabic",
-    slug: "arabic",
-    image:
-      "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
-    description:
-      "Learn Arabic online and gain fluency in the language. Whether you are a beginner or seeking to enhance your skills, our live classes will help you master Arabic.",
-  },
-  {
-    title: "Ijazah",
-    slug: "ijazah",
-    image:
-      "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
-    description:
-      "Get the highest certificate and become among the best Muslims to learn the Quran perfectly with Ijazah. Gain confidence in your recitation and learn it with our qualified teachers.",
-  },
-  {
-    title: "Islamic Studies",
-    slug: "islamic-studies",
-    image:
-      "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
-    description:
-      "Learn Islamic Studies about the beauty of Islam and its teachings from scratch, in fun and easy ways with the best teachers.",
-  },
-  {
-    title: "Quran",
-    slug: "quran-category",
-    image:
-      "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
-    description:
-      "Learn Quran online with qualified teachers through interactive and easy-to-follow lessons.",
-  },
-  {
-    title: "Tajweed",
-    slug: "tajweed",
-    image:
-      "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
-    description:
-      "Improve your Quran recitation and learn the correct Tajweed rules with experienced teachers.",
-  },
-  {
-    title: "Revert Program",
-    slug: "revert-program",
-    image:
-      "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp",
-    description:
-      "A special program for new Muslims to learn the basics of Islam in a simple and supportive environment.",
-  },
-];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-function ProgramCard({
-  title,
-  image,
-  description,
-  index,
-  slug,
-}: {
-  title: string;
-  image: string;
-  description: string;
-  index: number;
-  slug: string;
-}) {
+function ProgramCard({ item, index }: { item: Category; index: number }) {
   return (
-    <Link href={`/courses/${slug}`}>
+    <Link href={`/courses/${item.slug}`}>
       <motion.div
         initial={{
           opacity: 0,
@@ -113,8 +50,10 @@ function ProgramCard({
                 }}
               >
                 <Image
-                  src={image}
-                  alt={title}
+                  src={
+                    "https://www.tareequljannah.com/wp-content/uploads/2025/12/arabic-test-768x768-1.webp"
+                  }
+                  alt={item.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover"
@@ -123,8 +62,10 @@ function ProgramCard({
             </div>
 
             <CardContent className="px-1 pt-1.5 text-center">
-              <h3 className="text-base font-semibold">{title}</h3>
-              <p className="mt-1 text-base leading-[1.45]">{description}</p>
+              <h3 className="text-base font-semibold">{item.name}</h3>
+              <p className="mt-1 text-base leading-[1.45]">
+                {item.description}
+              </p>
             </CardContent>
           </motion.div>
         </Card>
@@ -133,7 +74,7 @@ function ProgramCard({
   );
 }
 
-export function ProgramsSection() {
+export function ProgramsSection({ categories }: { categories: Category[] }) {
   return (
     <section className="overflow-hidden bg-white px-4 py-8">
       <div className="container max-w-7xl">
@@ -162,8 +103,8 @@ export function ProgramsSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
-          {programs.map((program, index) => (
-            <ProgramCard key={program.title} {...program} index={index} />
+          {categories.map((category, index) => (
+            <ProgramCard key={category.name} item={category} index={index} />
           ))}
         </div>
       </div>
