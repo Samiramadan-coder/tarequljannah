@@ -12,7 +12,6 @@ export default async function Page() {
     throw new Error("Failed to fetch categories");
   }
 
-  console.log(data.data);
   return (
     <div>
       <PageBanner

@@ -1,7 +1,17 @@
-import ListOfCategories from "@/components/courses/list-of-categories";
+import { http } from "@/lib/http";
+import { Course } from "../../../../types/courses";
 import PageBanner from "@/components/reusable/page-banner";
+import ListOfCourses from "@/components/courses/list-of-courses";
 
-export default function Page() {
+export default async function Page() {
+  const { data, ok } = await http.get<{ data: Course[] }>(
+    "/api/v1/admin/courses",
+  );
+
+  if (!ok) {
+    throw new Error("Failed to fetch categories");
+  }
+
   return (
     <div>
       <PageBanner
@@ -11,7 +21,7 @@ export default function Page() {
       />
 
       <div className="py-10">
-        <ListOfCategories />
+        <ListOfCourses courses={data.data} />
       </div>
     </div>
   );
