@@ -8,7 +8,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 function ProgramCard({ item, index }: { item: Category; index: number }) {
   return (
-    <Link href={`/courses/${item.slug}`}>
+    <Link href={`/categories/${item.slug}`}>
       <motion.div
         initial={{
           opacity: 0,

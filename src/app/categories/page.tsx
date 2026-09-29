@@ -5,7 +5,7 @@ import { ProgramsSection } from "@/components/landing/programs";
 
 export default async function Page() {
   const { data, ok } = await http.get<{ data: Category[] }>(
-    "/api/v1/admin/categories?type=course",
+    "/api/v1/website/categories/course",
   );
 
   if (!ok) {
